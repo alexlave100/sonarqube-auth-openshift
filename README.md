@@ -8,4 +8,4 @@ The SonarQube instance hosting the plugin must be running in an OpenShift pod
 
 ### License
 
-Licensed under the GNU Lesser General Public License, Version 3.0
+Licensed under the [GNU Lesser General Public License, Version 3.0](http://www.gnu.org/licenses/lgpl.txt)
