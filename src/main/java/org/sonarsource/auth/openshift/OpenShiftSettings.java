@@ -60,8 +60,7 @@ public class OpenShiftSettings {
 	
 	public String getCert() {
 		return CA_CRT;
-	}
-	
+	}	
 		
 	public String getSarURI() {
 		return SAR_URI;
@@ -94,8 +93,8 @@ public class OpenShiftSettings {
 	public Set<String> getOpenShiftGroups() {
 		return this.openShiftGroups;		
 	}
-	public String getNamespace() throws IOException { //FileNotFoundException, 
-		return ServiceAccountBufferReader(NAMESPACE);
+	public String getNamespace() throws IOException {  
+		return serviceAccountBufferReader(NAMESPACE);
 	}
 	
 	public boolean isEnabled() {
@@ -126,22 +125,23 @@ public class OpenShiftSettings {
 		return urlWithEndingSlash(settings.getString(API_URL));
 	}
 		
-	public String getClientId() throws IOException {		//FileNotFoundException, 
+	public String getClientId() throws IOException {		
 		return getServiceAccountNamespacePrefix()+namespacePathWithEndingColon()+getServiceAccountName();
 	  }
 
-	public String getClientSecret() throws IOException {	 //FileNotFoundException, 
-	     return ServiceAccountBufferReader(TOKEN);
+	public String getClientSecret() throws IOException {	 
+	     return serviceAccountBufferReader(TOKEN);
 	}
 
-	private String namespacePathWithEndingColon() throws IOException {	// FileNotFoundException, 
+	private String namespacePathWithEndingColon() throws IOException {	
 			return getNamespace() + COLON;		
 	}
 	
 	private static String urlWithEndingSlash(String url) {
 		if (url != null && !url.endsWith(BACKSLASH)) {
 			return url + BACKSLASH;
-		} return url;
+		} 
+		return url;
 	}
 	
 	public String getButtonColor() {		
@@ -206,11 +206,11 @@ public class OpenShiftSettings {
 	        .category(CATEGORY)
 	        .subCategory(SUBCATEGORY)
 	        .type(STRING)
-	        .index(index++)
+	        .index(index)
 	        .build());	      
 	  }
 	 
-	 private String ServiceAccountBufferReader(String directory) throws FileNotFoundException, IOException{				            
+	 private String serviceAccountBufferReader(String directory) throws FileNotFoundException, IOException{				            
 		    BufferedReader bufferReader = 
 		    			new BufferedReader(
 		    				new FileReader(

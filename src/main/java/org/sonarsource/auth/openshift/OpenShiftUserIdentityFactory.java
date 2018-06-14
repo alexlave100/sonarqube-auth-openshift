@@ -19,18 +19,16 @@ public class OpenShiftUserIdentityFactory {
 		  
   public OpenShiftUserIdentityFactory(OpenShiftSettings settings) {
     this.settings = settings;
-  }
-
-  public UserIdentity create(GsonUser user) {
 	  if(settings.getOpenShiftGroups()==null) 
 		  LOGGER.info("OpenShift groups cannot be identified.");
-		  
+  }
+
+  public UserIdentity create(GsonUser user) {		  
 	  UserIdentity.Builder builder = UserIdentity.builder()
 			  .setGroups(settings.getOpenShiftGroups())
 			  .setProviderLogin(user.getName())
 			  .setLogin(generateLogin(user))
-			  .setName(generateName(user));       
-    
+			  .setName(generateName(user));          
 	  return builder.build();
   }
 

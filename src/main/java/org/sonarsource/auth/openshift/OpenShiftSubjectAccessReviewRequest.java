@@ -66,3 +66,17 @@ public class OpenShiftSubjectAccessReviewRequest {
     @Key
     public List<String> scopes;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

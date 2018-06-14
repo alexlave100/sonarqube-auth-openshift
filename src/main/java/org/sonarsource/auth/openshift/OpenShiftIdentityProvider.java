@@ -10,7 +10,6 @@ import java.util.concurrent.ExecutionException;
 
 import java.io.IOException;
 
-
 import javax.servlet.http.HttpServletRequest;
 
 import com.github.scribejava.core.model.Verb;
@@ -88,7 +87,7 @@ public class OpenShiftIdentityProvider implements OAuth2IdentityProvider {
 		return settings.getAllowUsersToSignUp();
 	}
 
-	private void GETServiceAccountName() throws IOException { //FileNotFoundException,
+	private void getServiceAccountName() throws IOException { 
 		HttpClient client = HttpClientBuilder.create().build();
 		HttpGet request = new HttpGet(settings.getApiURL() + settings.getUserURI());		
 		
@@ -101,16 +100,16 @@ public class OpenShiftIdentityProvider implements OAuth2IdentityProvider {
 		String serviceAccountAsJson = EntityUtils.toString(entity, UTF8_ENCODING);
 		GsonUser gson =  GsonUser.parseObject(serviceAccountAsJson);		
 		String[] userNameParts = gson.getName().split(":");       
-		
+		LOGGER.info(String.format("\n\n %s \n\n", serviceAccountAsJson));
+
 		if (userNameParts != null && userNameParts.length == 4) 
-            settings.setServicAccountName(userNameParts[3]);          
+            settings.setServicAccountName(userNameParts[3]);
 	}
 	
 	@Override
 	public void init(InitContext context) {			
 		try {
-			//GETMasterInfo();
-			GETServiceAccountName();				
+			getServiceAccountName();				
 		} catch (IOException e1) {
 			LOGGER.info(String.format("Service account name couldn't be resolved.%n"));
 			LOGGER.log(Level.INFO, String.format("Service account name couldn't be resolved.%n"), e1);
@@ -171,10 +170,10 @@ public class OpenShiftIdentityProvider implements OAuth2IdentityProvider {
 
 			settings.setOpenShiftGroups(sonarQubeGroups);			  
 		    
-			GsonUser user = getUser(scribe, accessToken);	    		    
+			GsonUser user = getUser(scribe, accessToken);	   			
 		    UserIdentity userIdentity = identityFactory.create(user);
-
-	    	    context.authenticate(userIdentity);	    	    
+	    	    
+		    context.authenticate(userIdentity);	    	    
 	    	    context.redirectToRequestedPage();
 	  }
 	  
@@ -188,7 +187,9 @@ public class OpenShiftIdentityProvider implements OAuth2IdentityProvider {
 		 
 		  OpenShiftSubjectAccessReviewResponse accessReviewResponse = new OpenShiftSubjectAccessReviewResponse();		  
 		  HashSet<String> allowedVerbs = new HashSet<String>();		  
-		  String namespace = settings.getNamespace();		  
+		  String namespace = settings.getNamespace();
+		  
+		  
 		  OAuthRequest request = new OAuthRequest(Verb.POST , requestUrl);		  
 		  request.addHeader("Content-Type", "application/json");
 
