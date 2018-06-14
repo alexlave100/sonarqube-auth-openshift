@@ -1,7 +1,7 @@
 Openshift Authentication Plugin for SonarQube
 ==========
 
-Plugin that enables login to SonarQube using OpenShift credentials. 
+Plugin that enables user login to SonarQube using OpenShift credentials. 
 
 The SonarQube instance hosting the plugin must be running in an OpenShift pod
 
