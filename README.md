@@ -1,7 +1,7 @@
 # Openshift Authentication Plugin for SonarQube 
 
 
-![alt text](https://www.blackducksoftware.com/sites/default/files/images/OpenShift.png)
+![alt text](https://www.blackducksoftware.com/sites/default/files/images/OpenShift.png =250x250)
 ![alt text](https://pbs.twimg.com/profile_images/628548811263078400/zIVhxKyn_400x400.png)
 
 
