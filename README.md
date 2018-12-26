@@ -1,4 +1,4 @@
-Openshift Authentication Plugin for SonarQube
+# Openshift Authentication Plugin for SonarQube
 ==========
 
 Plugin that enables user login to SonarQube using OpenShift credentials. 
